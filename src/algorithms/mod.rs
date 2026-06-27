@@ -2,11 +2,15 @@ use std::fmt::Debug;
 
 use crate::algorithms::{
     bubble::{BubbleSort, BubbleSortState},
+    merge::{MergeSort, MergeSortState},
     quick::{QuickSort, QuickSortState},
+    selection::{SelectionSort, SelectionSortState},
 };
 
 pub mod bubble;
+pub mod merge;
 pub mod quick;
+pub mod selection;
 
 trait Algorithm: Debug {
     type State: Clone;
@@ -23,6 +27,8 @@ trait Algorithm: Debug {
 pub enum AlgorithmType {
     BubbleSort(BubbleSort, Option<BubbleSortState>),
     QuickSort(QuickSort, Option<QuickSortState>),
+    MergeSort(MergeSort, Option<MergeSortState>),
+    SelectionSort(SelectionSort, Option<SelectionSortState>),
 }
 
 impl AlgorithmType {
@@ -30,6 +36,8 @@ impl AlgorithmType {
         match self {
             AlgorithmType::BubbleSort(algo, _) => algo.name(),
             AlgorithmType::QuickSort(algo, _) => algo.name(),
+            AlgorithmType::MergeSort(algo, _) => algo.name(),
+            AlgorithmType::SelectionSort(algo, _) => algo.name(),
         }
     }
 
@@ -41,6 +49,12 @@ impl AlgorithmType {
             AlgorithmType::QuickSort(algo, state) => {
                 *state = Some(algo.initial_state(bars));
             }
+            AlgorithmType::MergeSort(algo, state) => {
+                *state = Some(algo.initial_state(bars));
+            }
+            AlgorithmType::SelectionSort(algo, state) => {
+                *state = Some(algo.initial_state(bars));
+            }
         }
     }
 
@@ -48,6 +62,8 @@ impl AlgorithmType {
         match self {
             AlgorithmType::BubbleSort(algo, Some(state)) => algo.step(state),
             AlgorithmType::QuickSort(algo, Some(state)) => algo.step(state),
+            AlgorithmType::MergeSort(algo, Some(state)) => algo.step(state),
+            AlgorithmType::SelectionSort(algo, Some(state)) => algo.step(state),
             _ => true,
         }
     }
@@ -56,6 +72,8 @@ impl AlgorithmType {
         match self {
             AlgorithmType::BubbleSort(algo, Some(state)) => algo.get_data(state),
             AlgorithmType::QuickSort(algo, Some(state)) => algo.get_data(state),
+            AlgorithmType::MergeSort(algo, Some(state)) => algo.get_data(state),
+            AlgorithmType::SelectionSort(algo, Some(state)) => algo.get_data(state),
             _ => Vec::new(),
         }
     }
@@ -64,6 +82,8 @@ impl AlgorithmType {
         match self {
             AlgorithmType::BubbleSort(algo, Some(state)) => algo.get_current_indices(state),
             AlgorithmType::QuickSort(algo, Some(state)) => algo.get_current_indices(state),
+            AlgorithmType::MergeSort(algo, Some(state)) => algo.get_current_indices(state),
+            AlgorithmType::SelectionSort(algo, Some(state)) => algo.get_current_indices(state),
             _ => Vec::new(),
         }
     }
@@ -72,6 +92,8 @@ impl AlgorithmType {
         match self {
             AlgorithmType::BubbleSort(algo, Some(state)) => algo.get_comparisons(state),
             AlgorithmType::QuickSort(algo, Some(state)) => algo.get_comparisons(state),
+            AlgorithmType::MergeSort(algo, Some(state)) => algo.get_comparisons(state),
+            AlgorithmType::SelectionSort(algo, Some(state)) => algo.get_comparisons(state),
             _ => Vec::new(),
         }
     }
