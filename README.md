@@ -1,6 +1,6 @@
 # TUI Algorithm Visualizer
 
-Weekend project written in Rust that visualizes sorting algorithms directly in the terminal. Built with [`crossterm`](https://crates.io/crates/crossterm) and [`ratatui`](https://crates.io/crates/ratatui). Step through Bubble, Quick, Merge, and Selection sort as animated bar charts.
+Weekend project written in Rust that visualizes sorting algorithms directly in the terminal. Built with [`crossterm`](https://crates.io/crates/crossterm) and [`ratatui`](https://crates.io/crates/ratatui). Step through Bubble, Quick, Merge, and Selection sort as animated bar charts. Maybe i'll add more sort algorithms and other type of algorithms some day.
 
 ## Preview
 ![Demo](./previews/preview.gif)
